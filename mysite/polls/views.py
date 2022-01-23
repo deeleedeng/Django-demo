@@ -5,6 +5,7 @@ from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 
 from .models import Question, Choice
 
@@ -21,7 +22,9 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         # 返回最新的 5 条问题，通过 django 提供的数据库 API 操作数据
-        return Question.objects.order_by('-pub_date')[:5]
+        # return Question.objects.order_by('-pub_date')[:5]
+        # 返回最新的 5 条问题，但不包括未来生效的日期
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
@@ -31,6 +34,10 @@ class DetailView(generic.DetailView):
     """
     model = Question
     template_name = 'polls/detail.html'
+
+    def get_queryset(self):
+        # 只返回当天的 question 详情
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
