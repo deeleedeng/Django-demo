@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Detail</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 </head>
 <body>
 <form action="{% url 'polls:vote' question.id %}" method="post">
@@ -11,11 +13,12 @@
         <legend><h1>{{ question.question_text }}</h1></legend>
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
+        {% else %}
         {% endif %}
         {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="chioice{{ forloop.counter }}" value="{{ choice.id }}">
-        <label for="chioice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-    <br>
+            <input type="radio" name="choice" id="chioice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="chioice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+            <br>
         {% endfor %}
     </fieldset>
     <input type="submit" value="Vote">

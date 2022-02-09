@@ -22,6 +22,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.contrib import admin
 
 
 class Question(models.Model):
@@ -31,6 +32,13 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    # admin.display 装饰器，用来根据某个对象值，设置是否展示对应的项
+    # 比如下面是根据 was_published_recently 方法返回的布尔值来确定在页面上是否展示该项
+    @admin.display(
+        boolean=True,
+        ordering='pub_date',
+        description='Published recently?',
+    )
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now

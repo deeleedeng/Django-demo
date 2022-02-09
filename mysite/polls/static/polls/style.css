@@ -1,0 +1,43 @@
+body {
+    background: white url("images/arnaud-steckle-q6BD_F7nX7E.jpg") no-repeat center fixed;
+    background-size: cover;
+    color: antiquewhite;
+    font-size: 24px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+body>a:visited {
+    color: white;
+    text-decoration: none;
+}
+body>a:link {
+    color: green;
+    text-decoration: none;
+}
+
+h1 {
+    color: orange;
+}
+
+li>a {
+    color: orange;
+    text-decoration: none;
+}
+
+ul {
+    color: white;
+    list-style-position: inside;
+    list-style-type: none;
+}
+
+
+div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+input {
+    font-size: 16px;
+    color: green;
+}
