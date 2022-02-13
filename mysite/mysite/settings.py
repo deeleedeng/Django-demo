@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # 自定义模版文件夹为 polls 下的 html， os.path.join(BASE_DIR, 'polls/html')
+        'DIRS': [],  # 自定义模版文件夹为 polls 下的 html， BASE_DIR / 'polls/html'
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

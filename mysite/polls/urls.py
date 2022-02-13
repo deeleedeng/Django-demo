@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'polls'
 
-# 视同普通视图
+# 使用普通视图
 # urlpatterns = [
 #     # ex: /polls/
 #     path('', views.index, name='index'),
