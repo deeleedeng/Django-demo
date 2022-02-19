@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Results</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
-</head>
-<body>
+{% extends "polls/base.html" %}
+{% block base %}
     <h1>{{ question.question_text }}</h1>
     <ul>
         {% for choice in question.choice_set.all %}
             <li>
                 {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
             </li>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{ choice.votes }}" aria-valuemin="0"
+                     aria-valuemax="100" style="width: {{ choice.votes }}%">
+                    <span class="sr-only">10%</span>
+                </div>
+            </div>
         {% endfor %}
     </ul>
-    <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-</body>
-</html>
+    <a href="{% url 'polls:detail' question.id %}">再次投票？</a>
+{% endblock %}

@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>PollsIndex</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
-    </head>
-    <body>
-        <div class="box">
-            {% if lastest_question_list %}
-            <ul>
-                {% for question in lastest_question_list %}
-                <li>
+{% extends "polls/base.html" %}
+{% block base %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>选项列表</th>
+            <th>创建时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in lastest_question_list %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>
                     <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <p>No polls are available.</p>
-            {% endif %}
-        </div>
-    </body>
-</html>
+                </td>
+                <td>{{ question.pub_date | date:"Y-m-d H:i:s" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
 

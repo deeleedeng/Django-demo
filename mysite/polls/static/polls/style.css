@@ -5,6 +5,7 @@ body {
     font-size: 24px;
     font-weight: bolder;
     text-align: center;
+    width: 100%;
 }
 
 body>a:visited {
@@ -16,11 +17,16 @@ body>a:link {
     text-decoration: none;
 }
 
+body div {
+    float: left;
+    width: 100%;
+}
+
 h1 {
     color: orange;
 }
 
-li>a {
+a {
     color: orange;
     text-decoration: none;
 }
@@ -40,4 +46,15 @@ div {
 input {
     font-size: 16px;
     color: green;
+}
+
+.daohang {
+    background-color: blueviolet;
+    color: chocolate;
+}
+
+.daohang li {
+    width: 25%;
+    float: left;
+    font-size: 32px;
 }
