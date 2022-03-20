@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from ninjademo.api import api
+from .apis import apis
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polls/', include('polls.urls'))
+    path('polls/', include('polls.urls')),
+    path('api/', api.urls),
+    path('apis/', apis.urls)
 ]
+
+# path('apis/', apis.urls)，通过 apps 实现多个应用共用一个 NinjaAPI 总路由

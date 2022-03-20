@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
 
-from .models import Question
+from .models import Question, Choice
 
 
 class QuestionModelTests(TestCase):
@@ -112,3 +112,22 @@ class QuestionDetailViewTest(TestCase):
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+
+class TemplateTest(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        time = timezone.now()
+        Question.object.create(id=1, question_text="Which you will choice?", pub_date=time)
+        Question.object.create(id=2, question_text="Which you will choice?")
+        Choice.object.create(question=1, choice_text="choice one", votes=5)
+        Choice.object.create(question=1, choice_text="choice two", votes=10)
+
+    @classmethod
+    def tearDownClass(cls):
+        pass
+
+    def test_indextemplate(self):
+        response = self.client.get('/polls/')
+        self.assertTemplateUsed(response, 'polls/index.html')
